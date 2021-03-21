@@ -151,11 +151,11 @@
                         <input type="hidden" readonly name="h" value="<?php echo $HEIGHT ?>">
                         <div class="form-group">
                             <label>Battery</label>
-                            <input type="number" class="form-control" name="b" placeholder="Enter Battery">
+                            <input type="number" min="5" value="100" class="form-control" name="b" placeholder="Enter Battery">
                         </div>
                         <div class="form-group">
                             <label>Trash</label>
-                            <input type="number" class="form-control" name="t" placeholder="Enter Trash">
+                            <input type="number" min="0" value="0" class="form-control" name="t" placeholder="Enter Trash">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
