@@ -179,9 +179,11 @@ function getCleans($roomIn, $tab, $space)
 function getSpecials($roomIn, $tab, $space)
 {
     $ret = "";
+    $roombaCounter = 1;
     for ($y = HEIGHT - 1; $y >= 0; $y--) {
         $tempY = HEIGHT - 1 - $y;
         for ($x = 0; $x < WIDTH; $x++) {
+
             if ($roomIn[$y][$x] == 3) {
                 //Charging
                 $ret .= $tab . $tab . "(is-charger x" . $x . "y" . $tempY . ")" . $space;
@@ -190,12 +192,35 @@ function getSpecials($roomIn, $tab, $space)
                 //garbage
                 $ret .= $tab . $tab . "(is-trashplace x" . $x . "y" . $tempY . ")" . $space;
             }
+            if ($roomIn[$y][$x] == 2) {
+                //roomba
+                $ret .= $tab . $tab . "(at roomba" . $roombaCounter . " x" . $x . "y" . $tempY . ")" . $space;
+                $roombaCounter++;
+            }
         }
     }
 
     return $ret;
 }
 
+function getRoombas($roomIn, $tab, $space)
+{
+    $ret = "";
+    $roombaCounter = 1;
+    for ($y = HEIGHT - 1; $y >= 0; $y--) {
+        $tempY = HEIGHT - 1 - $y;
+        for ($x = 0; $x < WIDTH; $x++) {
+
+            if ($roomIn[$y][$x] == 2) {
+                //roomba
+                $ret .= $tab . $tab . "roomba" . $roombaCounter . " - roomba" . $space;
+                $roombaCounter++;
+            }
+        }
+    }
+
+    return $ret;
+}
 
 $tab = "&nbsp;&nbsp;";
 $space = "<br>";
@@ -237,7 +262,7 @@ printRoom($room);
 $objects = $space . "
 " . $tab . "(:objects" . $space . "
 " . getObjects($tab, $space) . "
-" . $tab . $tab . "roomba - roomba" . $space . "
+" . getRoombas($room, $tab, $space) . "
 " . $tab . ")" . $space;
 
 $goals =  $space . "
@@ -255,6 +280,7 @@ $inits = $space . "
 " . getEmptys($room, $tab, $space) . $space  . "
 " . getCleans($room, $tab, $space) . $space  . "
 " . getSpecials($room, $tab, $space) . $space  . "
+" . $tab . $tab . "(=(battery-amount roomba) " . BATTERY_ROOMBA . ")" . $space . "
 " . $tab . $tab . "(=(battery-amount roomba) " . BATTERY_ROOMBA . ")" . $space . "
 " . $tab . $tab . "(=(trash-amount roomba) " . INITIAL_TRASH . ")" . $space . "
 " . $tab . $tab . "(= (steps) " . STEPS . ")" . $space . "

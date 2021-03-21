@@ -1,8 +1,20 @@
 <?php
+if (isset($_GET['h']) && isset($_GET['w'])) {
+    $HEIGHT = $_GET['h'];
+    $WIDTH = $_GET['w'];
+} else {
+?>
+    <form action="index.php" method="get">
+        <input type="number" name="h" placeholder="Height"><br>
 
-$HEIGHT = 5;
-$WIDTH = 10;
+        <input type="number" name="w" placeholder="Width"><br>
+        <button type="submit">Initialse Grid</button>
+    </form>
 
+
+<?php
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +41,7 @@ $WIDTH = 10;
         }
 
         .cont {
-            padding:10px
+            padding: 10px
         }
 
         .c1 {
@@ -83,7 +95,7 @@ $WIDTH = 10;
         <br>
         H
         <input type="number" readonly name="h" value="<?php echo $HEIGHT ?>">
-        
+
         <input type="submit" />
     </form>
 
