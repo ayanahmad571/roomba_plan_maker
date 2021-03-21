@@ -10,7 +10,7 @@
     }
 </style>
 <?php
-if (!isset($_POST['data']) || !isset($_POST['h']) || !isset($_POST['w'])) {
+if (!isset($_POST['data']) || !isset($_POST['h']) || !isset($_POST['w']) || !isset($_POST['t']) || !isset($_POST['b'])) {
     header('Location: index.php');
 }
 $room = array();
@@ -20,9 +20,9 @@ $room = json_decode($_POST['data']);
 
 define("WIDTH", $_POST['w']);
 define("HEIGHT", $_POST['h']);
-define("INITIAL_TRASH", 0);
+define("INITIAL_TRASH", $_POST['t']);
 define("STEPS", 0);
-define("BATTERY_ROOMBA", 100);
+define("BATTERY_ROOMBA", $_POST['b']);
 
 
 function getCellVal($val)
@@ -36,7 +36,7 @@ function getCellVal($val)
     switch ($val) {
 
         case 1:
-            $ret = "_";
+            $ret = "&nbsp;";
             break;
         case 2:
             $ret = "X";
@@ -60,12 +60,19 @@ function getCellVal($val)
 
 function printRoom($roomIn)
 {
+    // foreach ($roomIn as $row) {
+    //     echo '<div class="row">;';
+    //     foreach ($row as $cell) {
+    //         echo "<div class='cell'>" . getCellVal($cell) . "</div>";
+    //     }
+    //     echo '</div>';
+    // }
     foreach ($roomIn as $row) {
-        echo '<div class="row">';
+        echo ";";
         foreach ($row as $cell) {
-            echo "<div class='cell'>" . getCellVal($cell) . "</div>";
+            echo "|&nbsp;&nbsp;" . getCellVal($cell) . "";
         }
-        echo '</div>';
+        echo '<br>';
     }
 }
 

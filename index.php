@@ -80,7 +80,7 @@ if (isset($_GET['h']) && isset($_GET['w'])) {
     for ($y = $HEIGHT - 1; $y >= 0; $y--) {
         echo '<div class="row">';
         for ($x = 0; $x < $WIDTH; $x++) {
-            echo "<div  data-row='" . $y . "' data-col='" . $x . "' id='b" . $x . $y . "' class='cell c1'></div>";
+            echo "<div  data-row='" . $y . "' data-col='" . $x . "' id='bx" . $x . "y" . $y . "' class='cell c1'></div>";
         }
         echo '</div>';
     }
@@ -89,12 +89,10 @@ if (isset($_GET['h']) && isset($_GET['w'])) {
     <hr>
     <form action="problem.php" method="POST">
         <input id="dataInput" type="hidden" name="data" />
-        <br>
-        W
-        <input type="number" readonly name="w" value="<?php echo $WIDTH ?>">
-        <br>
-        H
-        <input type="number" readonly name="h" value="<?php echo $HEIGHT ?>">
+        <input type="hidden" readonly name="w" value="<?php echo $WIDTH ?>">
+        <input type="hidden" readonly name="h" value="<?php echo $HEIGHT ?>">
+        <input type="number" name="t" placeholder="Trash"><br>
+        <input type="number" name="b" placeholder="Battery"><br>
 
         <input type="submit" />
     </form>
@@ -117,10 +115,10 @@ if (isset($_GET['h']) && isset($_GET['w'])) {
         for ($y = 0; $y < $HEIGHT; $y++) {
             for ($x = 0; $x < $WIDTH; $x++) {
         ?>
-                $("#b<?php echo $x . $y; ?>").click(() => {
+                $("#bx<?php echo $x . "y" . $y; ?>").click(() => {
                     let type = $("#type").val();
                     setCell(<?php echo $x; ?>, <?php echo $y; ?>, type);
-                    $("#b<?php echo $x . $y; ?>").removeClass("c1 c2 c3 c4 c5").addClass(`c${type}`);
+                    $("#bx<?php echo $x . "y" . $y; ?>").removeClass("c1 c2 c3 c4 c5").addClass(`c${type}`);
 
                 });
         <?php
