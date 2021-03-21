@@ -10,14 +10,20 @@
     }
 </style>
 <?php
+if (!isset($_POST['data']) || !isset($_POST['h']) || !isset($_POST['w'])) {
+    header('Location: index.php');
+}
+$room = array();
 
-define("WIDTH", 3);
-define("HEIGHT", 3);
+$room = json_decode($_POST['data']);
+
+
+define("WIDTH", $_POST['w']);
+define("HEIGHT", $_POST['h']);
 define("INITIAL_TRASH", 0);
 define("STEPS", 0);
 define("BATTERY_ROOMBA", 100);
 
-$room = array();
 
 function getCellVal($val)
 {
@@ -206,14 +212,14 @@ $foot = "
 ";
 
 
-$row = array();
-for ($y = 0; $y < HEIGHT; $y++) {
-    for ($x = 0; $x < WIDTH; $x++) {
-        $row[$x] = 1;
-    }
-    $room[$y] = $row;
-    unset($row);
-}
+// $row = array();
+// for ($y = 0; $y < HEIGHT; $y++) {
+//     for ($x = 0; $x < WIDTH; $x++) {
+//         $row[$x] = 1;
+//     }
+//     $room[$y] = $row;
+//     unset($row);
+// }
 
 //1 = empty
 //2 = starting
@@ -221,10 +227,10 @@ for ($y = 0; $y < HEIGHT; $y++) {
 //4 = garbage disposal
 //5 = obstacle
 
-$room = setCell(0, 0, 2, $room);
-$room = setCell(1, 1, 5, $room);
-$room = setCell(0, 2, 4, $room);
-$room = setCell(2, 2, 3, $room);
+// $room = setCell(0, 0, 2, $room);
+// $room = setCell(1, 1, 5, $room);
+// $room = setCell(0, 2, 4, $room);
+// $room = setCell(2, 2, 3, $room);
 printRoom($room);
 
 
