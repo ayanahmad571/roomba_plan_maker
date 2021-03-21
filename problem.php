@@ -194,7 +194,9 @@ function getSpecials($roomIn, $tab, $space)
             }
             if ($roomIn[$y][$x] == 2) {
                 //roomba
-                $ret .= $tab . $tab . "(at roomba" . $roombaCounter . " x" . $x . "y" . $tempY . ")" . $space;
+                $ret .= $tab . $tab . "(at roomba" . $roombaCounter . " x" . $x . "y" . $tempY . ")" . $space . "
+                " . $tab . $tab . "(=(battery-amount roomba" . $roombaCounter . ") " . BATTERY_ROOMBA . ")" . $space . "
+                " . $tab . $tab . "(=(trash-amount roomba" . $roombaCounter . ") " . INITIAL_TRASH . ")" . $space . $space;
                 $roombaCounter++;
             }
         }
@@ -280,9 +282,7 @@ $inits = $space . "
 " . getEmptys($room, $tab, $space) . $space  . "
 " . getCleans($room, $tab, $space) . $space  . "
 " . getSpecials($room, $tab, $space) . $space  . "
-" . $tab . $tab . "(=(battery-amount roomba) " . BATTERY_ROOMBA . ")" . $space . "
-" . $tab . $tab . "(=(battery-amount roomba) " . BATTERY_ROOMBA . ")" . $space . "
-" . $tab . $tab . "(=(trash-amount roomba) " . INITIAL_TRASH . ")" . $space . "
+
 " . $tab . $tab . "(= (steps) " . STEPS . ")" . $space . "
 " . $tab . ")" . $space;
 
